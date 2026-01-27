@@ -1,0 +1,7 @@
+{
+  "name": "PMAL - Gestão de Efetivo",
+  "description": "Sistema de controle de efetivo para Oficiais da Polícia Militar de Alagoas, gerenciando cargos ocupados, vacâncias e oficiais acima do posto com integração inteligente.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
