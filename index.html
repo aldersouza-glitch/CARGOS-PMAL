@@ -7,8 +7,12 @@
     <title>PMAL - Controle de Oficiais</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      // Polyfill para evitar erros de ambiente em navegadores que esperam o objeto process
-      window.process = window.process || { env: {} };
+      // Polyfill para compatibilidade com bibliotecas que esperam Node.js process
+      window.process = { 
+        env: { 
+          NODE_ENV: 'production'
+        } 
+      };
     </script>
     <script type="importmap">
 {
@@ -24,25 +28,15 @@
 </script>
     <style>
       body {
-        background-color: #020617; /* slate-950 */
+        background-color: #020617;
         margin: 0;
         -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
         overflow-x: hidden;
       }
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #0f172a;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #1e293b;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #334155;
-      }
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: #0f172a; }
+      ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: #334155; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100">

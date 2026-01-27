@@ -7,7 +7,7 @@ import DashboardCards from './components/DashboardCards';
 const App: React.FC = () => {
   const [data, setData] = useState<OfficerData[]>(() => {
     try {
-      const saved = localStorage.getItem('pmal_v7_deploy_ready');
+      const saved = localStorage.getItem('pmal_v8_stable');
       return saved ? JSON.parse(saved) : INITIAL_DATA;
     } catch (e) {
       return INITIAL_DATA;
@@ -20,7 +20,7 @@ const App: React.FC = () => {
   const detailRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    localStorage.setItem('pmal_v7_deploy_ready', JSON.stringify(data));
+    localStorage.setItem('pmal_v8_stable', JSON.stringify(data));
   }, [data]);
 
   useEffect(() => {
@@ -82,8 +82,7 @@ const App: React.FC = () => {
       setIsImportModalOpen(false);
       setPasteArea('');
     } catch (err) {
-      console.error(err);
-      alert('Erro ao processar dados. Verifique o formato.');
+      alert('Erro no processamento. Verifique o formato do texto colado.');
     }
   };
 
@@ -102,48 +101,38 @@ const App: React.FC = () => {
   }, [data]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500/30">
-      <header className="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b-2 border-cyan-900/50 shadow-xl">
-        <div className="max-w-[1400px] mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans">
+      <header className="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-sm border-b-2 border-cyan-900/50">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-4">
-            <div className="bg-cyan-600 p-2.5 rounded-xl shadow-[0_0_15px_rgba(8,145,178,0.4)]">
+            <div className="bg-cyan-600 p-2 rounded-lg shadow-lg">
               <svg className="w-6 h-6 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 00-2 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
             </div>
             <div>
               <h1 className="text-xl font-black tracking-tight uppercase italic flex items-center gap-2">
-                PMAL <span className="text-cyan-500 text-xs not-italic font-bold border-l border-slate-700 pl-2 uppercase tracking-widest">ESTRATÉGICO</span>
+                PMAL <span className="text-cyan-500 text-xs not-italic font-bold border-l border-slate-700 pl-2">ESTRATÉGICO</span>
               </h1>
-              <p className="text-slate-500 text-[9px] font-bold tracking-[0.4em] uppercase">Gestão de Oficiais de Alagoas</p>
+              <p className="text-slate-500 text-[8px] font-bold tracking-widest uppercase">Diretoria de Pessoal - PMAL</p>
             </div>
           </div>
           
-          <div className="flex items-center gap-4">
-            <button 
-              onClick={() => setIsImportModalOpen(true)}
-              className="bg-cyan-700 hover:bg-cyan-600 active:scale-95 text-white px-6 py-2 rounded-lg text-[10px] font-black uppercase flex items-center gap-2 transition-all border-b-2 border-cyan-900 shadow-lg"
-            >
-              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
-              Importar Dados
-            </button>
-          </div>
+          <button 
+            onClick={() => setIsImportModalOpen(true)}
+            className="bg-cyan-700 hover:bg-cyan-600 text-white px-5 py-2 rounded-lg text-[10px] font-black uppercase flex items-center gap-2 transition-all shadow-md active:scale-95"
+          >
+            Importar Dados
+          </button>
         </div>
       </header>
 
-      <main className="max-w-[1400px] mx-auto px-6 py-8 space-y-8">
+      <main className="max-w-7xl mx-auto px-6 py-8">
         <DashboardCards data={data} onSelectRank={setSelectedRank} selectedRank={selectedRank} />
         
-        <div ref={detailRef} className="scroll-mt-24">
+        <div ref={detailRef} className="mt-8 scroll-mt-24">
           {selectedRank === 'VAGOS' && (
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl animate-in fade-in slide-in-from-bottom-2 duration-300">
+            <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl animate-in fade-in slide-in-from-bottom-2 duration-500">
               <div className="bg-rose-900/10 px-6 py-4 flex justify-between items-center border-b border-slate-800">
-                <div className="flex items-center gap-3">
-                  <div className="bg-rose-500/10 p-2 rounded-lg text-rose-500">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4" /></svg>
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-black uppercase tracking-tight text-white">Mapa de Vacâncias</h3>
-                  </div>
-                </div>
+                <h3 className="text-sm font-black uppercase tracking-tight text-white">Mapa de Vacâncias</h3>
                 <button onClick={() => setSelectedRank(null)} className="text-slate-500 hover:text-white transition-colors">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
@@ -151,7 +140,7 @@ const App: React.FC = () => {
               <div className="p-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   {vacancyList.map((v, idx) => (
-                    <div key={idx} className="bg-slate-950/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center justify-center text-center">
+                    <div key={idx} className="bg-slate-950/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center justify-center">
                       <span className="text-slate-500 text-[9px] font-black uppercase tracking-widest mb-1">{v.rank}</span>
                       <p className="text-3xl font-black text-white leading-none">{v.vacant}</p>
                     </div>
@@ -162,16 +151,11 @@ const App: React.FC = () => {
           )}
 
           {selectedRank && selectedRank !== 'VAGOS' && (
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl animate-in fade-in slide-in-from-bottom-2 duration-300">
+            <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl animate-in fade-in slide-in-from-bottom-2 duration-500">
               <div className="bg-cyan-900/10 px-6 py-4 flex justify-between items-center border-b border-slate-800">
-                <div className="flex items-center gap-3">
-                  <div className="bg-cyan-500/10 p-2 rounded-lg text-cyan-500">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 11H5m14 0" /></svg>
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-black uppercase tracking-tight text-white">{selectedRank}</h3>
-                    <p className="text-cyan-600 text-[9px] font-bold uppercase tracking-widest">Relatório de Oficiais um Posto Acima</p>
-                  </div>
+                <div>
+                  <h3 className="text-sm font-black uppercase tracking-tight text-white">{selectedRank}</h3>
+                  <p className="text-cyan-600 text-[9px] font-bold uppercase tracking-widest">Oficiais um Posto Acima</p>
                 </div>
                 <button onClick={() => setSelectedRank(null)} className="text-slate-500 hover:text-white transition-colors">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" /></svg>
@@ -180,27 +164,25 @@ const App: React.FC = () => {
 
               <div className="p-0 overflow-x-auto">
                 {selectedData?.surplusOfficers && selectedData.surplusOfficers.length > 0 ? (
-                  <table className="w-full text-left border-collapse min-w-[600px]">
+                  <table className="w-full text-left border-collapse min-w-[700px]">
                     <thead>
                       <tr className="bg-slate-800/40 border-b border-slate-800">
                         <th className="px-6 py-3 text-[9px] font-black uppercase text-slate-500 tracking-widest w-12 text-center">Ord.</th>
-                        <th className="px-6 py-3 text-[9px] font-black uppercase text-slate-500 tracking-widest w-16 text-center">Antig.</th>
+                        <th className="px-6 py-3 text-[9px] font-black uppercase text-slate-500 tracking-widest w-16 text-center">Ant.</th>
                         <th className="px-6 py-3 text-[9px] font-black uppercase text-slate-500 tracking-widest">Oficial</th>
-                        <th className="px-6 py-3 text-[9px] font-black uppercase text-slate-500 tracking-widest">Lotação e Função</th>
+                        <th className="px-6 py-3 text-[9px] font-black uppercase text-slate-500 tracking-widest">Lotação / Função</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-800/50">
                       {selectedData.surplusOfficers.map((off, idx) => (
                         <tr key={idx} className="hover:bg-slate-800/20 transition-colors">
-                          <td className="px-6 py-3 text-slate-600 font-bold text-xs text-center">{String(idx + 1).padStart(2, '0')}</td>
-                          <td className="px-6 py-3 text-center">
+                          <td className="px-6 py-4 text-slate-600 font-bold text-xs text-center">{idx + 1}</td>
+                          <td className="px-6 py-4 text-center">
                             <span className="text-cyan-500 font-black text-xs">{off.antiquity || '--'}</span>
                           </td>
-                          <td className="px-6 py-3">
-                            <p className="font-bold text-slate-100 text-xs uppercase">{off.name}</p>
-                          </td>
-                          <td className="px-6 py-3">
-                            <p className="text-slate-400 text-[10px] font-medium leading-relaxed mb-0.5">{off.role}</p>
+                          <td className="px-6 py-4 font-bold text-slate-100 text-xs uppercase">{off.name}</td>
+                          <td className="px-6 py-4">
+                            <p className="text-slate-400 text-[10px] font-medium leading-tight mb-1">{off.role}</p>
                             <span className="text-slate-600 text-[8px] font-black uppercase tracking-widest">{off.sector}</span>
                           </td>
                         </tr>
@@ -208,58 +190,33 @@ const App: React.FC = () => {
                     </tbody>
                   </table>
                 ) : (
-                  <div className="p-12 text-center flex flex-col items-center gap-4 opacity-30">
-                    <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5" /></svg>
-                    <p className="text-[10px] font-black uppercase tracking-widest">Sem Registros Nominais</p>
+                  <div className="p-16 text-center opacity-30">
+                    <p className="text-[10px] font-black uppercase tracking-widest">Sem Registros Disponíveis</p>
                   </div>
                 )}
               </div>
             </div>
           )}
         </div>
-
-        <footer className="mt-12 flex flex-col md:flex-row items-center justify-between gap-6 bg-slate-900/40 p-6 rounded-2xl border border-slate-800 border-dashed">
-          <div className="flex items-center gap-4">
-            <div className="bg-slate-800 p-3 rounded-lg border border-slate-700 shadow-inner">
-              <span className="text-xl font-black text-slate-500">PMAL</span>
-            </div>
-            <div>
-              <p className="text-cyan-500 text-[10px] font-black uppercase tracking-[0.3em] mb-1">Gabinete de Operações</p>
-              <h2 className="text-lg font-black text-white tracking-tight uppercase italic">Controle Nominal GSCG</h2>
-            </div>
-          </div>
-          <div className="flex gap-2">
-             <div className="h-1.5 w-1.5 rounded-full bg-cyan-500 animate-pulse" />
-             <div className="h-1.5 w-1.5 rounded-full bg-slate-800" />
-             <div className="h-1.5 w-1.5 rounded-full bg-slate-800" />
-          </div>
-        </footer>
       </main>
 
       {isImportModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/95 backdrop-blur-md animate-in fade-in duration-300">
-          <div className="bg-slate-900 rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl border border-slate-800">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/95 backdrop-blur-sm animate-in fade-in duration-300">
+          <div className="bg-slate-900 rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl border border-slate-800">
             <div className="p-8">
-              <div className="flex items-center gap-4 mb-6">
-                 <div className="bg-cyan-600 p-3 rounded-xl text-slate-950">
-                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6" /></svg>
-                 </div>
-                 <div>
-                   <h2 className="text-xl font-black text-white italic uppercase tracking-tight">Sync Data</h2>
-                   <p className="text-slate-500 text-[9px] font-bold uppercase tracking-widest">Importação de Relatórios QOEM</p>
-                 </div>
-              </div>
+              <h2 className="text-xl font-black text-white italic uppercase tracking-tight mb-2">Sincronizar Efetivo</h2>
+              <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-6">Cole os dados brutos do relatório nominal</p>
               
               <textarea 
-                className="w-full h-64 bg-slate-950 border border-slate-800 rounded-xl p-4 text-xs font-mono text-cyan-500 focus:border-cyan-700 outline-none transition-all placeholder:text-slate-900"
-                placeholder="Cole o dump das tabelas de oficiais aqui..."
+                className="w-full h-72 bg-slate-950 border border-slate-800 rounded-xl p-4 text-xs font-mono text-cyan-500 focus:border-cyan-700 outline-none transition-all"
+                placeholder="Cole o dump aqui..."
                 value={pasteArea}
                 onChange={(e) => setPasteArea(e.target.value)}
               />
 
               <div className="mt-6 flex gap-4">
                 <button onClick={() => setIsImportModalOpen(false)} className="px-6 py-2 rounded-lg font-bold text-slate-500 uppercase text-[10px] hover:bg-slate-800 transition-colors">Cancelar</button>
-                <button onClick={() => processDataString(pasteArea)} disabled={!pasteArea.trim()} className="flex-1 bg-cyan-700 text-white py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-cyan-600 disabled:opacity-10 transition-all">Processar</button>
+                <button onClick={() => processDataString(pasteArea)} disabled={!pasteArea.trim()} className="flex-1 bg-cyan-700 text-white py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-cyan-600 disabled:opacity-50 transition-all">Processar Dados</button>
               </div>
             </div>
           </div>
