@@ -7,12 +7,14 @@
     <title>PMAL - Controle de Oficiais</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      // Polyfill para evitar que o código quebre se process.env não estiver disponível
-      window.process = { 
-        env: { 
+      // Polyfill robusto para ambiente de navegador (essencial para o SDK @google/genai)
+      window.process = {
+        env: {
           NODE_ENV: 'production',
-          API_KEY: '' // Será preenchido pelo ambiente ou ignorado se não usado
-        } 
+          API_KEY: '' 
+        },
+        cwd: () => '/',
+        nextTick: (cb) => setTimeout(cb, 0)
       };
     </script>
     <script type="importmap">
@@ -29,11 +31,30 @@
 </script>
     <style>
       body {
-        background-color: #020617;
+        background-color: #020617; /* slate-950 */
         margin: 0;
         -webkit-font-smoothing: antialiased;
         overflow-x: hidden;
       }
+      #root:empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: #020617;
+      }
+      /* Indicador visual de carregamento caso o JS demore */
+      #root:empty::after {
+        content: "";
+        width: 32px;
+        height: 32px;
+        border: 3px solid #0f172a;
+        border-top-color: #06b6d4;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      
       ::-webkit-scrollbar { width: 8px; }
       ::-webkit-scrollbar-track { background: #0f172a; }
       ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
