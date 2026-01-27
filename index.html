@@ -7,10 +7,11 @@
     <title>PMAL - Controle de Oficiais</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      // Polyfill para compatibilidade com bibliotecas que esperam Node.js process
+      // Polyfill para evitar que o código quebre se process.env não estiver disponível
       window.process = { 
         env: { 
-          NODE_ENV: 'production'
+          NODE_ENV: 'production',
+          API_KEY: '' // Será preenchido pelo ambiente ou ignorado se não usado
         } 
       };
     </script>
