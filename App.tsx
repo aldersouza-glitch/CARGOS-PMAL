@@ -157,15 +157,12 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500/30 relative overflow-x-hidden">
-      {/* Marca d'água removida */}
-
       <header className="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 shadow-2xl">
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-5">
             <div className="relative group">
               <div className="absolute -inset-1 bg-cyan-500/20 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
               <div className="relative w-14 h-14 bg-slate-950 rounded-xl flex items-center justify-center overflow-hidden border border-slate-800">
-                {/* Imagem do brasão removida, mantendo o container para estética */}
                 <div className="w-8 h-8 rounded bg-cyan-500/20 flex items-center justify-center">
                   <span className="text-cyan-500 font-black text-xs">PM</span>
                 </div>
@@ -215,7 +212,20 @@ const App: React.FC = () => {
           <>
             <DashboardCards data={data} onSelectRank={setSelectedRank} selectedRank={selectedRank} />
             
-            <div ref={detailRef} className="scroll-mt-36">
+            <div ref={detailRef} className="scroll-mt-36 min-h-[400px]">
+              {!selectedRank && (
+                <div className="flex flex-col items-center justify-center py-32 animate-in fade-in zoom-in duration-1000 select-none pointer-events-none">
+                  <h2 className="text-[12rem] md:text-[15rem] font-black italic text-slate-900/60 leading-none tracking-tighter uppercase relative">
+                    GSCG
+                    <div className="absolute inset-x-0 -bottom-10 flex justify-center">
+                      <span className="text-[10px] md:text-xs not-italic font-black text-cyan-950 tracking-[1.5em] uppercase whitespace-nowrap bg-slate-950 px-6 py-2 border-y border-slate-900">
+                        Gabinete do Subcomando Geral
+                      </span>
+                    </div>
+                  </h2>
+                </div>
+              )}
+
               {selectedRank === 'VAGOS' && (
                 <div className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-500">
                   <div className="bg-rose-900/10 px-8 py-5 flex justify-between items-center border-b border-slate-800">
@@ -371,7 +381,6 @@ const App: React.FC = () => {
           <div className="bg-slate-900 rounded-[2.5rem] w-full max-w-3xl overflow-hidden shadow-[0_0_100px_rgba(0,0,0,0.8)] border-2 border-slate-800">
             <div className="p-10">
               <div className="flex justify-center mb-8">
-                {/* Imagem do brasão removida, mantendo o ícone estilizado */}
                 <div className="w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center border border-slate-700">
                   <span className="text-cyan-500 font-black text-xl">PM</span>
                 </div>
