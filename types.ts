@@ -7,7 +7,8 @@ export enum RankPost {
   CAP_MAJ_QOE = 'Capitão QOE (Maj)',
   CAP = 'Capitão',
   TEN1 = '1º Tenente',
-  TEN2 = '2º Tenente'
+  TEN2 = '2º Tenente',
+  ASP = 'Aspirante'
 }
 
 export interface OfficerDetail {
@@ -15,6 +16,16 @@ export interface OfficerDetail {
   role: string;
   sector: string;
   antiquity?: string;
+  // Fix: added imageUrl to resolve "Object literal may only specify known properties" error
+  imageUrl?: string;
+}
+
+export interface AntiquityRecord {
+  antiquity: string;
+  name: string;
+  omp: string;
+  // Fix: added imageUrl for consistency and better type safety in lists
+  imageUrl?: string;
 }
 
 export interface OfficerData {

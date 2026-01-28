@@ -43,7 +43,6 @@
         height: 100vh;
         background: #020617;
       }
-      /* O spinner que você vê é este CSS. Ele some quando o React carrega. */
       #root:empty::after {
         content: "";
         width: 40px;
@@ -63,7 +62,6 @@
 </head>
 <body class="bg-slate-950 text-slate-100">
     <div id="root"></div>
-    <!-- Carregamento explícito do módulo principal -->
     <script type="module" src="index.tsx"></script>
 </body>
 </html>
