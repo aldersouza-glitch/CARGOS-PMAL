@@ -157,14 +157,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500/30 relative overflow-x-hidden">
-      <div className="fixed inset-0 pointer-events-none opacity-[0.03] flex items-center justify-center z-0">
-        <img 
-          src="https://raw.githubusercontent.com/ai-gen-images/pmal/main/brasao_subcomando.png" 
-          alt="Watermark Brasão" 
-          className="w-[800px] h-auto grayscale brightness-200"
-          onError={(e) => (e.currentTarget.style.display = 'none')}
-        />
-      </div>
+      {/* Marca d'água removida */}
 
       <header className="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 shadow-2xl">
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
@@ -172,11 +165,10 @@ const App: React.FC = () => {
             <div className="relative group">
               <div className="absolute -inset-1 bg-cyan-500/20 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
               <div className="relative w-14 h-14 bg-slate-950 rounded-xl flex items-center justify-center overflow-hidden border border-slate-800">
-                <img 
-                  src="https://raw.githubusercontent.com/ai-gen-images/pmal/main/brasao_subcomando.png" 
-                  alt="Brasão Subcomando" 
-                  className="w-12 h-12 object-contain"
-                />
+                {/* Imagem do brasão removida, mantendo o container para estética */}
+                <div className="w-8 h-8 rounded bg-cyan-500/20 flex items-center justify-center">
+                  <span className="text-cyan-500 font-black text-xs">PM</span>
+                </div>
               </div>
             </div>
             <div>
@@ -379,11 +371,10 @@ const App: React.FC = () => {
           <div className="bg-slate-900 rounded-[2.5rem] w-full max-w-3xl overflow-hidden shadow-[0_0_100px_rgba(0,0,0,0.8)] border-2 border-slate-800">
             <div className="p-10">
               <div className="flex justify-center mb-8">
-                <img 
-                  src="https://raw.githubusercontent.com/ai-gen-images/pmal/main/brasao_subcomando.png" 
-                  className="w-20 h-20 grayscale opacity-30" 
-                  alt="Modal Brasão" 
-                />
+                {/* Imagem do brasão removida, mantendo o ícone estilizado */}
+                <div className="w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center border border-slate-700">
+                  <span className="text-cyan-500 font-black text-xl">PM</span>
+                </div>
               </div>
               <h2 className="text-2xl font-black text-white italic uppercase tracking-tighter mb-8 text-center">Processamento de Efetivo Estratégico</h2>
               <textarea 

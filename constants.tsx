@@ -13,8 +13,8 @@ export const INITIAL_DATA: OfficerData[] = [
       { name: 'JOSE DANIEL DE LIMA NETO', role: 'Corregedor', sector: 'CG', antiquity: '2' },
       { name: 'ANAXIMANDRO TENORIO DE SA', role: 'Comandante do CPRA', sector: 'CPRA', antiquity: '6' },
       { name: 'PHELIPE ROGERIO DOS SANTOS', role: 'Diretor de Pessoal', sector: 'DP', antiquity: '28' },
-      { name: 'HENRIQUE JATOBA CORREIA', role: 'Comandante do CME', sector: 'CME', antiquity: '48' },
       { name: 'SILVIO JOSE LUCIO E SILVA', role: 'Diretor de Comunicação Social', sector: 'DCS', antiquity: '45' },
+      { name: 'HENRIQUE JATOBA CORREIA', role: 'Comandante do CME', sector: 'CME', antiquity: '48' },
       { name: 'HIRAQUE AGNNES DOS SANTOS', role: 'Comandante do Comando de Policiamento Metropolitano', sector: 'CPRM', antiquity: '46' },
       { name: 'THIAGO DE MORAES DUARTE OLIVEIRA', role: 'Diretor de Inteligência', sector: 'DINT', antiquity: '73' },
       { name: 'FERNANDO JOSE FERREIRA SOARES JUNIOR', role: 'Comandante do CPRSUL', sector: 'CPRSUL', antiquity: '74' }
